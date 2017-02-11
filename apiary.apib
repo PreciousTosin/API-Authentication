@@ -266,6 +266,7 @@ You can modify client information with this
 + Request (application/json)
 
         {
+            "clientId": "9djnjfkslsldtrsjyefomncv",
             "callbackUrl": "http://whereithappens.com",
         }
 
@@ -277,3 +278,84 @@ You can modify client information with this
 You can remove a client application
 
 + Response 204 (No Content)
+
+## Oauth Authorization Code [/api.factory.zone/v1/oauth/authorization_code]
+
+When using the "authorization code" grant type for Oauth Authentication, 
+we uses this resource to fetch the authorization code.
+
+
+### Retrieve Authorization code [POST]
+
++ Request (application/json)
+
+        {
+            "clientId": "9djnjfkslsldtrsjyefomncv",
+            "responseType": "code",
+            "callbackUrl": "http://whereithappens.com",
+            "scope": "ReadWrite"
+        }
+        
++ Response 201 (application/json)
+        
+        {
+            "callbackurl": "http://whereithappens.com/#auth_code=87sgsshjshkaj57sjxgxg"
+        }
+        
+
+## Oauth Access Token [/api.factory.zone/v1/oauth/access_token]
+
+(Grant Type - Authorization Code)
+When using the "Authorization Code" grant type, we use this resource to request for access token
+
+### Request Access Token [POST]
+
++ Request (application/json)
+
+        {
+            "clientId": "0hdbdvwhaswryuijgsjasdbs",
+            "clientSecret": "6cbcbcnmsnnssmsssert",
+            "authCode": "87sgsshjshkaj57sjxgxg",
+            "callbackUrl": "http://bentotech.com/",
+            "scope": "read"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "accessToken": "4aschdbdsmlxkuctsgsjskckcmcm",
+            "tokenType": "bearer",
+            "expiresIn": "21500",
+            "refreshToken": "7liusigsloufhhfgvgcbbnjj",
+            "scope": "read",
+            "userId": "jd3h45vvnvjhdurt7rhru3",
+            "info": {
+                "firstName": "Chris",
+                "lastName": "Soyborg",
+                "email": "soyborg@mail.com"
+            }
+        }
+        
+        
+## Oauth Access Token [/api.factory.zone/v1/oauth/authorize]
+
+(Grant Type - Implicit)
+When using the "Implicit" grant type, we use this resource to request an access token.
+This grant type does not support refresh tokens.
+
+### Request Access Token [POST]
+
++ Request (application/json)
+
+        {
+            "clientId": "0hdbdvwhaswryuijgsjasdbs",
+            "responseType": "token",
+            "callbackUrl": "http://bentotech.com/",
+            "scope": "read"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "callbackUrl": "http://bentotech.com/#token=6jutbdhcbvbvnvjsbxxnxnx"
+        }

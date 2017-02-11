@@ -1,0 +1,169 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# Authentication API
+
+Authentication is an API that provides services to create, edit, delete, verify the identity of users and applications.
+
+## Users Collection [/api.factory.zone/v1/users]
+
+### List All Users [GET]
+
++ Response 200 (application/json)
+
+        {
+            "page":{
+                "number": "1",
+                "totalPages": "10",
+            
+            },
+            "users": [
+                {
+                    "userId": "jd3h45vvnvjhdurt7rhru3",
+                    "userAccess": "admin",
+                    "firstName": "Chris",
+                    "lastName":"Soyborg",
+                    "email":"soyborg@mail.com",
+                    "company": "Veritech",
+                    "createdAt": "2015-08-05T08:40:51.620Z"
+                },
+                {
+                    "userId": "8shdg48bbogikmytwvsjeormc",
+                    "userAccess": "manager",
+                    "firstName": "Clint",
+                    "lastName":"Eastwood",
+                    "email":"eastwood@mail.com",
+                    "company": "Veritech",
+                    "createdAt": "2015-08-05T08:40:51.620Z"
+                },
+                {
+                    "userId": "hh465jkkvk78fuystfmkknxn",
+                    "userAccess": "employee",
+                    "firstName": "Mark",
+                    "lastName":"Guttenberg",
+                    "email":"guttenberg@mail.com",
+                    "company": "Veritech",
+                    "createdAt": "2015-08-05T08:40:51.620Z"
+                },
+                {
+                    "userIdd": "65sshbdjd34kgitydbmlcocj",
+                    "userAccess": "employee",
+                    "firstName": "John",
+                    "lastName":"Raymond",
+                    "email":"raymond@mail.com",
+                    "company": "Veritech",
+                    "createdAt": "2015-08-05T08:40:51.620Z"
+                },
+            ]
+        }
+
+### Create a New User [POST]
+
+You may create a new user using this action. It takes a JSON
+object containing user information like firstname,lastname, email, password, company .
+
++ Request (application/json)
+
+        {
+            "firstName": "Ben",
+            "lastName": "Haggerthy",
+            "email": "Haggerthy@mail.com",
+            "password": "**********",
+            "company": "Veritech"
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: api.factory.zone/v1/users
+
+    + Body
+
+            {
+                "userId": "30jhgghlkkjhfsdfuujkk",
+                "userAccess": "employee",
+                "firstName": "Ben",
+                "lastName":"Haggerthy",
+                "email":"Haggerthy@mail.com",
+                "company": "Veritech",
+                "createdAt": "2015-08-05T08:40:51.620Z"
+            }
+
+##User [/api.factory.zone/v1/users/{userId}]
+
++ Parameters
+
+    + userId (number) - user id of type UUID
+
+### Retrieve User [GET]
+
+This retrieves information partaining to a single user of known id
+
++ Response 200 (application/json)
+
+        {
+            "userId": "hh465jkkvk78fuystfmkknxn",
+            "userAccess": "employee",
+            "firstName": "Mark",
+            "lastName":"Guttenberg",
+            "email":"guttenberg@mail.com",
+            "company": "Veritech",
+            "createdAt": "2015-08-05T08:40:51.620Z"
+        }
+
+### Edit User [PUT]
+
+You can modify user information with this
+
++ Request (application/json)
+
+        {
+            "email": "chris@mail.com",
+        }
+
++ Response 204 (No content)
+
+
+### Remove User [DELETE]
+
+You can remove a user 
+
++ Response 204 (No Content)
+    
+
+## ClientApp Collection [/api.factory.zone/v1/users/clientapp]
+
+### List all Applications [GET]
+
+We retrieve all client application information
+
++ Response 200 (application/json)
+
+        {
+            "pages": {
+                "Number": "1",
+                "totalPages": "10",
+                "nextPage": "api.factory.zone/v1/clientapp/2"
+            },
+            "clientapps": [
+                {
+                    "id": {
+                        "id": "9djnjfkslsldtrsjyefomncv"
+                        "userid": "jd3h45vvnvjhdurt7rhru3"
+                    },
+                    "clientName": "ChrisBot",
+                    "accessLevel": "ReadWrite",
+                    "callbackUrl": "http://twinkletoes.com/"
+                },
+                {
+                    "id": {
+                        "id": "2kggdhafasgdhfjdwnwgfhjh"
+                        "userid": "8shdg48bbogikmytwvsjeormc"
+                    },
+                    "clientName": "ClintBot",
+                    "accessLevel": "ReadWrite",
+                    "callbackUrl": "http://techwerk.com/"
+                },
+            ]
+        }

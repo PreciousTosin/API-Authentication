@@ -336,7 +336,18 @@ When using the "Authorization Code" grant type, we use this resource to request 
             }
         }
         
-        
+### Delete Access Token [DELETE]
+
+Used to delete tokens issued to client applications that have been compromised
+
++ Request (application/json)
+
+        {
+            "clientId": "2kggdhafasgdhfjdwnwgfhjh"
+        }
+
++ Response 204 (No Content)
+
 ## Oauth Access Token [/api.factory.zone/v1/oauth/authorize]
 
 (Grant Type - Implicit)
@@ -359,3 +370,15 @@ This grant type does not support refresh tokens.
         {
             "callbackUrl": "http://bentotech.com/#token=6jutbdhcbvbvnvjsbxxnxnx"
         }
+
+### Delete Access Token [DELETE]
+
+Used to delete tokens issued to client applications that have been compromised
+
++ Request (application/json)
+
+        {
+            "clientId": "2kggdhafasgdhfjdwnwgfhjh"
+        }
+
++ Response 204 (No Content)

@@ -132,11 +132,11 @@ You can remove a user
 + Response 204 (No Content)
     
 
-## ClientApp Collection [/api.factory.zone/v1/users/clientapp]
+## ClientApp Collection for all users [/api.factory.zone/v1/users/clientapp]
 
 ### List all Applications [GET]
 
-We retrieve all client application information
+We retrieve all client application information for all users
 
 + Response 200 (application/json)
 
@@ -144,12 +144,13 @@ We retrieve all client application information
             "pages": {
                 "Number": "1",
                 "totalPages": "10",
-                "nextPage": "api.factory.zone/v1/clientapp/2"
+                "nextPage": "api.factory.zone/v1/users/clientapp/2"
             },
             "clientapps": [
                 {
                     "id": {
-                        "id": "9djnjfkslsldtrsjyefomncv"
+                        "clientId": "9djnjfkslsldtrsjyefomncv",
+                        "clientSecret": "6cbcbcnmsnnssmsssert"
                         "userid": "jd3h45vvnvjhdurt7rhru3"
                     },
                     "clientName": "ChrisBot",
@@ -158,7 +159,8 @@ We retrieve all client application information
                 },
                 {
                     "id": {
-                        "id": "2kggdhafasgdhfjdwnwgfhjh"
+                        "clientId": "2kggdhafasgdhfjdwnwgfhjh",
+                        "clientSecret": "8xxxbxbxjssmsnxvnmy",
                         "userid": "8shdg48bbogikmytwvsjeormc"
                     },
                     "clientName": "ClintBot",
@@ -167,3 +169,111 @@ We retrieve all client application information
                 },
             ]
         }
+
+
+## ClientApp Collection For Single User [/api.factory.zone/v1/users/{userId}/clientapp]
+
+### List all Applications [GET]
+
+We retrieve all client applications for a single user
+
++ Response 200 (application/json)
+
+        {
+            "pages": {
+                "Number": "1",
+                "totalPages": "1",
+                "nextPage": "api.factory.zone/v1/users/clientapp/2"
+            },
+            "clientapps": [
+                {
+                    "id": {
+                        "clientId": "9djnjfkslsldtrsjyefomncv",
+                        "clientSecret": "6cbcbcnmsnnssmsssert"
+                        "userid": "jd3h45vvnvjhdurt7rhru3"
+                    },
+                    "clientName": "ChrisBot",
+                    "accessLevel": "ReadWrite",
+                    "callbackUrl": "http://twinkletoes.com/"
+                },
+                {
+                    "id": {
+                        "clientId": "2kggdhafasgdhfjdwnwgfhjh",
+                        "clientSecret": "7uythjfwerascmcdvdd",
+                        "userid": "jd3h45vvnvjhdurt7rhru3"
+                    },
+                    "clientName": "SoyBot",
+                    "accessLevel": "ReadWrite",
+                    "callbackUrl": "http://techwerk.com/"
+                },
+            ]
+        }
+
+### Create a new Application [POST]
+
++ Request (application/json)
+
+        {
+            "appName": "Ben",
+            "accessLevel": "Haggerthy",
+            "callbackUrl": "http://bentotech.com",
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: api.factory.zone/v1/users/clientapp
+
+    + Body
+
+            {
+                "id": {
+                        "clientId": "0hdbdvwhaswryuijgsjasdbs",
+                        "clientSecret": "6cbcbcnmsnnssmsssert",
+                        "userid": "65shncjskmhdhcnckzmzmnznzz"
+                    },
+                    "clientName": "BenBot",
+                    "accessLevel": "ReadWrite",
+                    "callbackUrl": "http://bentotech.com/"
+                },
+            }
+            
+
+## ClientApp [/api.factory.zone/v1/users/{userId}/clientapp/{clientId}]
+
+### Retrieve Client [GET]
+
+This retrieves information partaining to a single Application for a user of known id
+
++ Response 200 (application/json)
+
+        {
+            "id": {
+                "clientId": "9djnjfkslsldtrsjyefomncv",
+                "clientSecret": "6cbcbcnmsnnssmsssert",
+                "userid": "jd3h45vvnvjhdurt7rhru3"
+            },
+            "clientName": "ChrisBot",
+            "accessLevel": "ReadWrite",
+            "callbackUrl": "http://twinkletoes.com/"
+        }
+
+### Edit Client [PUT]
+
+You can modify client information with this
+
++ Request (application/json)
+
+        {
+            "callbackUrl": "http://whereithappens.com",
+        }
+
++ Response 204 (No content)
+
+
+### Remove Client [DELETE]
+
+You can remove a client application
+
++ Response 204 (No Content)

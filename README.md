@@ -1,2 +1,2 @@
 # API-Authentication
-Documenation for API Authentication
+Documentation for Authentication API
